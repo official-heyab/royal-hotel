@@ -14,7 +14,7 @@
                 <ul class="nav navbar-nav menu_nav ml-auto">
                     <li class="nav-item {{ (Route::currentRouteName() == 'home') ? 'active' : '' }}" ><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item {{ (Route::currentRouteName() == 'about') ? 'active' : '' }}"><a class="nav-link" href="{{ route('about') }}">About us</a></li>
-                    <li class="nav-item {{ (Route::currentRouteName() == 'services') ? 'active' : '' }}" ><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item {{ (Route::currentRouteName() == 'user.services') ? 'active' : '' }}" ><a class="nav-link" href="{{ route('user.services') }}">Services</a></li>
                     <li class="nav-item {{ (Route::currentRouteName() == 'contact') ? 'active' : '' }}" ><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
                     <li class="nav-item" ><a class="nav-link" href="{{ route('dashboard') }}">Admin Dashboard</a></li>
 

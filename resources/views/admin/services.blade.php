@@ -35,9 +35,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Company</h1>
-                        <a href="#" data-toggle="modal" data-target="#createModal" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                            <i class="fas fa-plus fa-sm text-white-50"></i> Create Company
+                        <h1 class="h3 mb-0 text-gray-800">Services</h1>
+                        <a href="#" data-toggle="modal" data-target="#createModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> Create New
                         </a>
                     </div>
 
@@ -54,7 +54,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of all companies</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of all services</h6>
                         </div>
                         <div class="card-body">
                             <div class="table">
@@ -62,63 +62,41 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th class="fit">Receptionists</th>
-                                            <th>Werefa</th>
+                                            <th>Reservations</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th class="fit">Receptionists</th>
-                                            <th>Werefa</th>
+                                            <th>Reservations</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($companies as $company)
+                                        @foreach($services as $service)
                                             <tr>
                                                 <td>
-                                                    <img width=100 src="{{$company->logo}}">
-                                                    {{$company->name}}<br><br>
-                                                    <strong>Werefa price: </strong>{{$company->ticket_price}}
+                                                    <img width=100 src="{{$service->cover_image}}">
+                                                    {{$service->name}}<br><br>
+                                                    <strong>Price: </strong>{{$service->price}}
                                                     <br><br>
 
                                                     <a href="#" data-toggle="modal" data-target="#editModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$company}}">
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$service}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">Edit</span>
                                                     </a>
 
                                                     <a href="#" data-toggle="modal" data-target="#deleteModal"
-                                                        class="btn btn-danger btn-icon-split" data-val="{{$company}}">
+                                                        class="btn btn-danger btn-icon-split" data-val="{{$service}}">
                                                         <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
                                                         <span class="text">Delete</span>
                                                     </a>
 
                                                 </td>
-                                                <td class="fit">
-                                                    <ul>
-                                                        @foreach($company->receptionists as $recep)
-                                                        <li>
-                                                            {{$recep->name}}
-                                                            <a href="#" data-toggle="modal" data-target="#editReceptionistModal"
-                                                                class="btn btn-secondary" data-val="{{$recep}}" data-company-val="{{$company}}">Edit
-                                                            </a>
-                                                            <a href="#" data-toggle="modal" data-target="#deleteReceptionistModal"
-                                                                class="btn btn-danger" data-val="{{$recep}}" data-company-val="{{$company}}">Delete
-                                                            </a>
-                                                        </li>
-                                                        @endforeach
-                                                    </ul>
-                                                    <a href="#" data-toggle="modal" data-target="#addReceptionistModal"
-                                                        class="btn btn-success btn-icon-split" data-val="{{$company}}">
-                                                        <span class="icon text-white-50"><i class="fas fa-check"></i></span>
-                                                        <span class="text">Add more</span>
-                                                    </a>
-                                                </td>
                                                 <td>
-                                                    <strong>{{$company->peopleWaiting()}} people waiting</strong><br>
-                                                    <a href="#" data-toggle="modal" data-target="#queueModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$company}}">
+                                                    <strong>{{ $service->peopleWaiting() }} reservations waiting</strong><br>
+                                                    <a href="#" data-toggle="modal" data-target="#reservationModal"
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$service}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">History</span>
                                                     </a>
@@ -159,18 +137,14 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('sb-theme/js/demo/datatables-demo.js')}}"></script>
     <style>
-        .table td.fit, .table th.fit {
-            white-space: nowrap;
-            width: 1%;
-        }
-
         #dataTable_wrapper > div:first-of-type label {
             display: inline-flex;
         }
     </style>
 
-    @include('admin.company-forms')
 
+
+    @include('admin.service-forms')
 
 </body>
 

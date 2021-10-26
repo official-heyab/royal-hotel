@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\Company;
 
 
 
@@ -18,10 +17,6 @@ class HomeController extends Controller{
         return view('home',$data);
     }
 
-
-    public function dashboard(){
-        return view('admin.home');
-    }
 
     public function welcome(){
         return view('welcome');

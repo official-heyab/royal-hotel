@@ -10,23 +10,22 @@
 
     <!-- Nav Item -->
     <li class="nav-item
-        {{ (Route::currentRouteName() == 'dashboard'
-        || Route::currentRouteName() == 'home' )
+        {{ (Route::currentRouteName() == 'dashboard' || Route::currentRouteName() == 'home' )
         ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i><span>Home</span>
         </a>
     </li>
 
-    <li class="nav-item {{ (Route::currentRouteName() == 'company') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('company') }}">
-            <i class="fas fa-fw fa-building"></i><span>Companies</span>
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.services') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.services') }}">
+            <i class="fas fa-fw fa-building"></i><span>Services</span>
         </a>
     </li>
 
-    <li class="nav-item {{ (Route::currentRouteName() == 'user') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('user') }}">
-            <i class="fas fa-fw fa-user"></i><span>Users</span>
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.rooms') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.rooms') }}">
+            <i class="fas fa-fw fa-user"></i><span>Rooms</span>
         </a>
     </li>
 

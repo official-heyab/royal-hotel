@@ -35,7 +35,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">User</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Rooms</h1>
                         <a href="#" data-toggle="modal" data-target="#createModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> Create New
                         </a>
@@ -54,7 +54,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of all users</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of all rooms</h6>
                         </div>
                         <div class="card-body">
                             <div class="table">
@@ -62,78 +62,44 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Current Werefa</th>
-                                            <th>Account Balance</th>
+                                            <th>Reservations</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Current Werefa</th>
-                                            <th>Account Balance</th>
+                                            <th>Reservations</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($rooms as $room)
                                             <tr>
                                                 <td>
-                                                    {{$user->name}}<br>
+                                                    <img width=100 src="{{$room->cover_image}}">
+                                                    {{$room->name}}<br><br>
+                                                    <strong>Price per night: </strong>{{$room->price_per_night}}
+                                                    <br><br>
+
                                                     <a href="#" data-toggle="modal" data-target="#editModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$user}}">
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$room}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">Edit</span>
                                                     </a>
+
                                                     <a href="#" data-toggle="modal" data-target="#deleteModal"
-                                                            class="btn btn-danger btn-icon-split" data-val="{{$user}}">
-                                                            <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+                                                        class="btn btn-danger btn-icon-split" data-val="{{$room}}">
+                                                        <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
                                                         <span class="text">Delete</span>
                                                     </a>
-                                                </td>
-                                                <td>{{$user->email}}</td>
-                                                <td>{{$user->phone}}</td>
-                                                <td>
-
-                                                    <ul>
-                                                        @foreach($user->waitingAt() as $queue)
-                                                        <li>{{$queue->company->name}}</li>
-                                                        @endforeach
-                                                    </ul>
-
-                                                    <br>
-
-                                                    <a href="#" data-toggle="modal" data-target="#getInLineModal"
-                                                        class="btn btn-success btn-icon-split" data-val="{{$user}}" data-companies-val="{{$companies}}">
-                                                        <span class="icon text-white-50"><i class="fas fa-angle-double-right"></i></span>
-                                                        <span class="text">Get in line</span>
-                                                    </a>
-
-                                                    <a href="#" data-toggle="modal" data-target="#queueModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$user}}">
-                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                                        <span class="text">History</span>
-                                                    </a>
-
 
                                                 </td>
                                                 <td>
-                                                    <strong>{{ $user->remainingAmount() }} Birr</strong><br>
-                                                    <a href="#" data-toggle="modal" data-target="#topUpModal"
-                                                        class="btn btn-success btn-icon-split" data-val="{{$user}}">
-                                                        <span class="icon text-white-50"><i class="fas fa-angle-double-right"></i></span>
-                                                        <span class="text">Top Up</span>
-                                                    </a>
-                                                    <a href="#" data-toggle="modal" data-target="#balanceModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$user}}"
-                                                        data-balance-val="{{$user->balanceSheets}}" data-remaining-val="{{$user->remainingAmount()}}">
+                                                    <strong>{{ $room->peopleWaiting() }} reservations waiting</strong><br>
+                                                    <a href="#" data-toggle="modal" data-target="#reservationModal"
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$room}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">History</span>
                                                     </a>
-
-
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -176,8 +142,8 @@
         }
     </style>
 
-    @include('admin.user-forms')
 
+    @include('admin.room-forms')
 
 </body>
 
