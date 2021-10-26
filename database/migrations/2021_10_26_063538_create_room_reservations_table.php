@@ -15,7 +15,7 @@ class CreateRoomReservationsTable extends Migration{
             $table->integer('number_of_adults');
             $table->integer('number_of_children');
             $table->boolean('status');
-            $table->longText('remark');
+            $table->longText('remark')->nullable();
             $table->timestamps();
 
             $table->foreign('reservation_id')

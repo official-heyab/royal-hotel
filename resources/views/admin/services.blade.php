@@ -75,7 +75,7 @@
                                         @foreach($services as $service)
                                             <tr>
                                                 <td>
-                                                    <img width=100 src="{{$service->cover_image}}">
+                                                    <i class="lnr lnr-{{$service->cover_image}}"></i>
                                                     {{$service->name}}<br><br>
                                                     <strong>Price: </strong>{{$service->price}}
                                                     <br><br>

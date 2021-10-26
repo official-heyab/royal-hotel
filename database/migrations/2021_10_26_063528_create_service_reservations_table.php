@@ -12,7 +12,7 @@ class CreateServiceReservationsTable extends Migration{
             $table->unsignedBigInteger('reservation_id');
             $table->unsignedBigInteger('service_id');
             $table->boolean('status');
-            $table->longText('remark');
+            $table->longText('remark')->nullable();
             $table->timestamps();
 
             $table->foreign('reservation_id')

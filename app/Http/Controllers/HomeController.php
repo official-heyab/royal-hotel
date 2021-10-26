@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Room;
+use App\Models\Service;
 
 
 
@@ -13,7 +15,8 @@ class HomeController extends Controller{
     }
 
     public function index(){
-        $data['companies'] = '';
+        $data['rooms'] = Room::all();
+        $data['services'] = Service::all();
         return view('home',$data);
     }
 
@@ -27,7 +30,8 @@ class HomeController extends Controller{
     }
 
     public function services(){
-        return view('services');
+        $data['services'] = Service::all();
+        return view('services', $data);
     }
 
     public function contact(){

@@ -10,9 +10,9 @@ class CreateServicesTable extends Migration{
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cover_image');
+            $table->string('cover_image')->nullable();;
             $table->decimal('price',9,3);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

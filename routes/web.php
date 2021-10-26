@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\ReservationController;
 
 //Auth Controller
 // require __DIR__.'/auth.php';
@@ -72,4 +73,14 @@ Route::post('/service/update', [ServicesController::class, 'update'])
 Route::post('/service/delete', [ServicesController::class, 'delete'])
     ->name('service.delete');
 
+
+//Reservation Controller
+Route::post('/reserve/room', [ReservationController::class, 'room'])
+->name('reserve.room');
+
+Route::post('/reserve/service', [ReservationController::class, 'service'])
+->name('reserve.service');
+
+Route::get('/reserve/thankyou/{id}', [ReservationController::class, 'thankyou'])
+->name('reserve.thankyou');
 

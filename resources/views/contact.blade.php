@@ -14,7 +14,7 @@
                 <div class="page-cover text-center">
                     <h2 class="page-cover-tittle">Contact Us</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li class="active">Contact Us</li>
                     </ol>
                 </div>

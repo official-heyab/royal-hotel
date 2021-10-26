@@ -17,12 +17,12 @@ Live demo: [Click Here](http://kuruzega.com/royal-hotel/public)
 1. Imported Front-End theme 
 2. Designed database
 3. Admin can create, read, update & delete Services & Rooms 
+4. Guests can reserve rooms & services
 
 
 ## Next Steps
-1. Reservation from customers
-2. Authentication
-3. Final tweaks & comment time 
+1. Authentication
+2. Final tweaks & comment time 
 
 
 

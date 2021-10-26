@@ -10,9 +10,9 @@ class CreateRoomsTable extends Migration{
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cover_image');
+            $table->string('cover_image')->nullable();
             $table->decimal('price_per_night',9,3);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
