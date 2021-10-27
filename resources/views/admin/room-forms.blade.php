@@ -195,7 +195,7 @@ aria-hidden="true">
                                 new Date(room.reservations[index].departure));
 
             tableBody +="<tr>";
-            tableBody +="<td>"+reservation.name+"</td>";
+            tableBody +="<td>"+reservation.reservation_name+"</td>";
             tableBody +="<td>"+reservation.phone_number+"</td>";
             tableBody +="<td>"+arrivalDate+"</td>";
             tableBody +="<td>"+departureDate+"</td>";

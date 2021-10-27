@@ -9,29 +9,36 @@ use App\Models\ServiceReservation;
 class ServicesSeeder extends Seeder{
 
     public function run(){
-        Service::factory()->count(5)->create();
+        Service::factory()->create([
+            'name'=>'Laundry',
+            'cover_image'=>'shirt'
+        ]);
+
+        Service::factory()->create([
+            'name'=>'Personal Trainer',
+            'cover_image'=>'bicycle'
+        ]);
+
+        Service::factory()->create([
+            'name'=>'Dinner Table',
+            'cover_image'=>'dinner'
+        ]);
+
+        Service::factory()->create([
+            'name'=>'Beauty Salon',
+            'cover_image'=>'store'
+        ]);
+
+        Service::factory()->create([
+            'name'=>'Conference Room',
+            'cover_image'=>'apartment'
+        ]);
 
         Service::all()->each(function(Service $service){
             $service->reservations()->saveMany(
                 ServiceReservation::factory()->count(10)->make()
             );
         });
-
-        // $service->name = "Laundry";
-        // $service->cover_image = "laundry.jpg";
-
-        // $service->name = "Table";
-        // $service->cover_image = "table.jpg";
-
-        // $service->name = "Beauty Salon";
-        // $service->cover_image = "beauty.jpg";
-
-        // $service->name = "Personal Trainer";
-        // $service->cover_image = "trainer.jpg";
-
-        // $service->name = "Conference Room";
-        // $service->cover_image = "conference.jpg";
-
 
 
     }

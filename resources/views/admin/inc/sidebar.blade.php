@@ -16,18 +16,66 @@
             <i class="fas fa-fw fa-tachometer-alt"></i><span>Home</span>
         </a>
     </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
+    @can('can_view_room_reservations')
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.waiting.rooms') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.waiting.rooms') }}">
+            <i class="lnr lnr-apartment"></i><span>Room Reservations</span>
+        </a>
+    </li>
+    @endcan
+
+    @can('can_view_service_reservations')
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.waiting.services') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.waiting.services') }}">
+            <i class="lnr lnr-layers"></i><span>Service Reservations</span>
+        </a>
+    </li>
+    @endcan
+
+    @can('can_view_personal_trainer_reservations')
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.waiting.trainer') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.waiting.trainer') }}">
+            <i class="lnr lnr-bicycle"></i><span>Personal Trainer Reservations</span>
+        </a>
+    </li>
+    @endcan
+
+    @can('can_view_dinner_table_reservations')
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.waiting.table') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.waiting.table') }}">
+            <i class="lnr lnr-dinner"></i><span>Dinner Table Reservations</span>
+        </a>
+    </li>
+    @endcan
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    @can('can_view_services')
     <li class="nav-item {{ (Route::currentRouteName() == 'admin.services') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.services') }}">
-            <i class="fas fa-fw fa-building"></i><span>Services</span>
+            <i class="lnr lnr-layers"></i><span>Services</span>
         </a>
     </li>
+    @endcan
 
+    @can('can_view_rooms')
     <li class="nav-item {{ (Route::currentRouteName() == 'admin.rooms') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.rooms') }}">
-            <i class="fas fa-fw fa-user"></i><span>Rooms</span>
+            <i class="lnr lnr-apartment"></i><span>Rooms</span>
         </a>
     </li>
+    @endcan
+
+    @can('can_view_users')
+    <li class="nav-item {{ (Route::currentRouteName() == 'admin.users') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.users') }}">
+            <i class="lnr lnr-users"></i><span>Users</span>
+        </a>
+    </li>
+    @endcan
 
 
     <!-- Divider -->

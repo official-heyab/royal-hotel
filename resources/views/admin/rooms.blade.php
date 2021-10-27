@@ -75,7 +75,11 @@
                                         @foreach($rooms as $room)
                                             <tr>
                                                 <td>
-                                                    <img width=100 src="{{$room->cover_image}}">
+                                                    @if(substr($room->cover_image, 0, 4 ) == "http"))
+                                                        <img width=100 src="{{$room->cover_image}}">
+                                                    @else
+                                                        <img width=100 src="{{asset('royal-theme/image')."/".$room->cover_image}}">
+                                                    @endif
                                                     {{$room->name}}<br><br>
                                                     <strong>Price per night: </strong>{{$room->price_per_night}}
                                                     <br><br>

@@ -16,7 +16,7 @@ class ReservationController extends Controller{
     }
 
     public function index(){
-       //waiting list
+
     }
 
     public function room(Request $request){
@@ -24,7 +24,7 @@ class ReservationController extends Controller{
 
         //Reservation
         $reservation = new Reservation;
-        $reservation->name = $request->input('name');
+        $reservation->reservation_name = $request->input('name');
         $reservation->phone_number = $request->input('contact');
         $reservation->arrival = $request->input('arrival');
         $reservation->save();
@@ -47,7 +47,7 @@ class ReservationController extends Controller{
     public function service(Request $request){
         //Reservation
         $reservation = new Reservation;
-        $reservation->name = $request->input('name');
+        $reservation->reservation_name = $request->input('name');
         $reservation->phone_number = $request->input('contact');
         $reservation->arrival = $request->input('arrival');
         $reservation->save();

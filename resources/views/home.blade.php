@@ -35,7 +35,11 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="accomodation_item text-center">
                                 <div class="hotel_img">
-                                    <img width=100 src="{{$room->cover_image}}" alt="">
+                                    @if(substr($room->cover_image, 0, 4 ) == "http"))
+                                        <img width=100 src="{{$room->cover_image}}">
+                                    @else
+                                        <img width=100 src="{{asset('royal-theme/image')."/".$room->cover_image}}">
+                                    @endif
                                 </div>
                                 <a href="#"><h4 class="sec_h4">{{ $room->name }}</h4></a>
                                 <h5>${{ $room->price_per_night }}<small>/night</small></h5>

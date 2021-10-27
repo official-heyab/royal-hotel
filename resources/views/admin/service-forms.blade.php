@@ -21,6 +21,9 @@ aria-hidden="true">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" placeholder="Name">
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="cover_image" placeholder="https://linearicons.com/free">
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control" name="price" placeholder="Price">
@@ -187,7 +190,7 @@ aria-hidden="true">
                                 new Date(reservation.arrival));
 
             tableBody +="<tr>";
-            tableBody +="<td>"+reservation.name+"</td>";
+            tableBody +="<td>"+reservation.reservation_name+"</td>";
             tableBody +="<td>"+reservation.phone_number+"</td>";
             tableBody +="<td>"+arrivalDate+"</td>";
             tableBody +="<td>"+service.reservations[index].remark+"</td>";

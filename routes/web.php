@@ -7,8 +7,9 @@ use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ReservationController;
 
-//Auth Controller
-// require __DIR__.'/auth.php';
+
+
+require __DIR__.'/auth.php';
 
 //Home Controller
 Route::get('/welcome', [HomeController::class, 'welcome'])
@@ -37,13 +38,28 @@ Route::get('/logout', [HomeController::class, 'logout'])
 
 //Admin Controller
 Route::get('/dashboard', [AdminController::class, 'dashboard'])
-->name('dashboard');
+->middleware(['auth'])->name('dashboard');
 
 Route::get('/admin/services', [AdminController::class, 'services'])
-    ->name('admin.services');
+->middleware(['auth'])->name('admin.services');
 
 Route::get('/admin/rooms', [AdminController::class, 'rooms'])
-->name('admin.rooms');
+->middleware(['auth'])->name('admin.rooms');
+
+Route::get('/admin/waiting/rooms', [AdminController::class, 'waiting4Rooms'])
+->middleware(['auth'])->name('admin.waiting.rooms');
+
+Route::get('/admin/waiting/services', [AdminController::class, 'waiting4Services'])
+->middleware(['auth'])->name('admin.waiting.services');
+
+Route::get('/admin/waiting/trainer', [AdminController::class, 'waiting4PersonalTranier'])
+->middleware(['auth'])->name('admin.waiting.trainer');
+
+Route::get('/admin/waiting/table', [AdminController::class, 'waiting4DinnerTable'])
+->middleware(['auth'])->name('admin.waiting.table');
+
+Route::get('/admin/users', [AdminController::class, 'users'])
+->middleware(['auth'])->name('admin.users');
 
 
 //Rooms Controller
@@ -83,4 +99,8 @@ Route::post('/reserve/service', [ReservationController::class, 'service'])
 
 Route::get('/reserve/thankyou/{id}', [ReservationController::class, 'thankyou'])
 ->name('reserve.thankyou');
+
+
+
+
 

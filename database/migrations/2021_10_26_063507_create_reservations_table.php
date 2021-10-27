@@ -9,7 +9,7 @@ class CreateReservationsTable extends Migration{
     public function up(){
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('reservation_name');
             $table->string('phone_number');
             $table->date('arrival');
             $table->timestamps();

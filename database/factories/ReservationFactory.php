@@ -7,7 +7,7 @@ class ReservationFactory extends Factory{
 
     public function definition(){
         return [
-            'name' => $this->faker->name(),
+            'reservation_name' => $this->faker->name(),
             'phone_number' => $this->faker->phoneNumber(),
             'arrival' => $this->faker->dateTimeBetween('+1 week', '+1 month'),
         ];
