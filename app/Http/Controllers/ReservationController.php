@@ -67,7 +67,49 @@ class ReservationController extends Controller{
     public function thankyou($reservationID){
         $data['reservation'] = Reservation::find($reservationID);
         return view('thankyou',$data);
-     }
+    }
+
+    public function reserveRoomDone($rrID){
+        $reservation = RoomReservation::find($rrID);
+        $reservation->status = 1;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest is done');
+    }
+
+    public function reserveRoomCallback($rrID){
+        $reservation = RoomReservation::find($rrID);
+        $reservation->status = 0;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest came back');
+    }
+
+    public function reserveServiceDone($reservationID){
+
+        $reservation = ServiceReservation::where([
+            ["reservation_id","=",$reservationID],
+            ["status","=",0]
+        ])->get()[0];
+        // echo "<pre>";
+        // print_r($reservation);
+
+        $reservation->status = 1;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest is done');
+    }
+
+    public function reserveServiceCallback($reservationID){
+        $reservation = ServiceReservation::where([
+            ["reservation_id","=",$reservationID],
+            ["status","=",1]
+        ])->get()[0];
+        $reservation->status = 0;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest came back');
+    }
 
 
 }

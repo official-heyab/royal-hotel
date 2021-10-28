@@ -7,7 +7,7 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Royal Hotels</title>
+<title>Royal Hotel</title>
 
 <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
 

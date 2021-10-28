@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Service;
+use App\Models\Role;
+use App\Models\User;
 
 class AdminController extends Controller{
 
@@ -19,6 +21,27 @@ class AdminController extends Controller{
     public function dashboard(){
         return view('admin.home');
     }
+
+    public function services(){
+        $this->authorize('can_view_services');
+        $data['services'] = Service::with('reservations.reservation')->get();
+        return view('admin.services', $data);
+    }
+
+    public function rooms(){
+        $this->authorize('can_view_rooms');
+        $data['rooms'] = Room::with('reservations.reservation')->get();
+        return view('admin.rooms', $data);
+    }
+
+    public function users(){
+        $this->authorize('can_view_users');
+        $data['roles'] = Role::all();
+        $data['users'] = User::all();
+        return view('admin.users',$data);
+    }
+
+
 
     public function waiting4Rooms(){
         $this->authorize('can_view_room_reservations');
@@ -66,24 +89,4 @@ class AdminController extends Controller{
 
         return view('admin.waiting.table', $data);
     }
-
-
-    public function services(){
-        $this->authorize('can_view_services');
-        $data['services'] = Service::with('reservations.reservation')->get();
-        return view('admin.services', $data);
-    }
-
-    public function rooms(){
-        $this->authorize('can_view_rooms');
-        $data['rooms'] = Room::with('reservations.reservation')->get();
-        return view('admin.rooms', $data);
-    }
-
-    public function users(){
-        $this->authorize('can_view_users');
-        return view('admin.home');
-    }
-
-
 }

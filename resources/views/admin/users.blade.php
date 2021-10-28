@@ -35,24 +35,22 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">
-                            <i class="lnr lnr-bicycle"></i><span> Personal Trainer Reservations</span>
-                        </h1>
+                        <h1 class="h3 mb-0 text-gray-800">User</h1>
+                        <a href="#" data-toggle="modal" data-target="#createModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> Create New
+                        </a>
                     </div>
-
-                    <!-- Statics -->
-                    @include('admin.inc.stats')
-                    <!-- End of Statics -->
 
                 </div>
                 <!-- /.container-fluid -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of all personal trainer reservations</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of all users</h6>
                         </div>
                         <div class="card-body">
                             <div class="table">
@@ -60,42 +58,35 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>When</th>
-                                            <th>Remarks</th>
-                                            <th>Phone</th>
-                                            <th>Status</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>When</th>
-                                            <th>Remarks</th>
-                                            <th>Phone</th>
-                                            <th>Status</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($personalTrainerReservations as $ptr)
+                                        @foreach($users as $user)
                                             <tr>
-                                                <td>{{ $ptr->reservation_name }}</td>
-                                                <td>{{ $ptr->arrival}}</td>
-                                                <td>{{ $ptr->remark }}</td>
-                                                <td>{{ $ptr->phone_number }}</td>
                                                 <td>
-                                                    @if ($ptr->status)
-                                                    <a href="{{ route('reserve.service.callback',$ptr->reservation_id) }}" class="btn btn-primary btn-icon-split">
+                                                    {{$user->name}}<br>
+                                                    <a href="#" data-toggle="modal" data-target="#editModal"
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$user}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                                        <span class="text">Call Back</span>
+                                                        <span class="text">Edit</span>
                                                     </a>
-                                                    @else
-                                                    <a href="{{ route('reserve.service.done',$ptr->reservation_id) }}" class="btn btn-success btn-icon-split">
-                                                        <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
-                                                        <span class="text">Done</span>
+                                                    <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                                            class="btn btn-danger btn-icon-split" data-val="{{$user}}">
+                                                            <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+                                                        <span class="text">Delete</span>
                                                     </a>
-
-                                                    @endif
                                                 </td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->role()->get()[0]->name}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -136,6 +127,8 @@
             display: inline-flex;
         }
     </style>
+
+    @include('admin.user-forms')
 
 
 </body>

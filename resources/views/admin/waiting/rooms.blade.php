@@ -65,7 +65,7 @@
                                             <th>Duration</th>
                                             <th>Remarks</th>
                                             <th>Phone</th>
-                                            <th>Status</th>
+                                            <th>Click when guests are done</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -75,7 +75,7 @@
                                             <th>Duration</th>
                                             <th>Remarks</th>
                                             <th>Phone</th>
-                                            <th>Status</th>
+                                            <th>Click when guests are done</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -86,7 +86,20 @@
                                                 <td>From: {{ $rr->arrival}} <br>To: {{ $rr->departure }}</td>
                                                 <td>{{ $rr->remark }}</td>
                                                 <td>{{ $rr->phone_number }}</td>
-                                                <td>{{ $rr->status }}</td>
+                                                <td>
+                                                    @if ($rr->status)
+                                                    <a href="{{ route('reserve.room.callback',$rr->id) }}" class="btn btn-primary btn-icon-split">
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">Call Back</span>
+                                                    </a>
+                                                    @else
+                                                    <a href="{{ route('reserve.room.done',$rr->id) }}" class="btn btn-success btn-icon-split">
+                                                        <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
+                                                        <span class="text">Done</span>
+                                                    </a>
+
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -82,7 +82,20 @@
                                                 <td>{{ $dtr->arrival}}</td>
                                                 <td>{{ $dtr->remark }}</td>
                                                 <td>{{ $dtr->phone_number }}</td>
-                                                <td>{{ $dtr->status }}</td>
+                                                <td>
+                                                    @if ($dtr->status)
+                                                    <a href="{{ route('reserve.service.callback',$dtr->reservation_id) }}" class="btn btn-primary btn-icon-split">
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">Call Back</span>
+                                                    </a>
+                                                    @else
+                                                    <a href="{{ route('reserve.service.done',$dtr->reservation_id) }}" class="btn btn-success btn-icon-split">
+                                                        <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
+                                                        <span class="text">Done</span>
+                                                    </a>
+
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

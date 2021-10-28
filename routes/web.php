@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UsersController;
 
 
 
@@ -46,6 +47,10 @@ Route::get('/admin/services', [AdminController::class, 'services'])
 Route::get('/admin/rooms', [AdminController::class, 'rooms'])
 ->middleware(['auth'])->name('admin.rooms');
 
+Route::get('/admin/users', [AdminController::class, 'users'])
+->middleware(['auth'])->name('admin.users');
+
+
 Route::get('/admin/waiting/rooms', [AdminController::class, 'waiting4Rooms'])
 ->middleware(['auth'])->name('admin.waiting.rooms');
 
@@ -58,8 +63,7 @@ Route::get('/admin/waiting/trainer', [AdminController::class, 'waiting4PersonalT
 Route::get('/admin/waiting/table', [AdminController::class, 'waiting4DinnerTable'])
 ->middleware(['auth'])->name('admin.waiting.table');
 
-Route::get('/admin/users', [AdminController::class, 'users'])
-->middleware(['auth'])->name('admin.users');
+
 
 
 //Rooms Controller
@@ -71,6 +75,12 @@ Route::post('/room/store', [RoomsController::class, 'store'])
 
 Route::post('/room/update', [RoomsController::class, 'update'])
     ->name('room.update');
+
+Route::post('/room/delete', [RoomsController::class, 'delete'])
+    ->name('room.delete');
+
+Route::post('/room/delete', [RoomsController::class, 'delete'])
+    ->name('room.delete');
 
 Route::post('/room/delete', [RoomsController::class, 'delete'])
     ->name('room.delete');
@@ -99,6 +109,35 @@ Route::post('/reserve/service', [ReservationController::class, 'service'])
 
 Route::get('/reserve/thankyou/{id}', [ReservationController::class, 'thankyou'])
 ->name('reserve.thankyou');
+
+
+Route::get('/reserve/room/done/{id}', [ReservationController::class, 'reserveRoomDone'])
+->name('reserve.room.done');
+
+Route::get('/reserve/room/callback/{id}', [ReservationController::class, 'reserveRoomCallback'])
+->name('reserve.room.callback');
+
+Route::get('/reserve/service/done/{id}', [ReservationController::class, 'reserveServiceDone'])
+->name('reserve.service.done');
+
+Route::get('/reserve/service/callback/{id}', [ReservationController::class, 'reserveServiceCallback'])
+->name('reserve.service.callback');
+
+
+
+//Users Controller
+Route::get('/user', [UsersController::class, 'index'])
+    ->name('user');
+
+Route::post('/user/store', [UsersController::class, 'store'])
+    ->name('user.store');
+
+Route::post('/user/update', [UsersController::class, 'update'])
+    ->name('user.update');
+
+Route::post('/user/delete', [UsersController::class, 'delete'])
+    ->name('user.delete');
+
 
 
 

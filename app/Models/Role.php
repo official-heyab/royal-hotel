@@ -12,6 +12,10 @@ class Role extends Model{
     public const IS_CHEF = 2;
     public const IS_TRAINER = 3;
 
+    public function user(){
+        return $this->hasMany(User::class);
+    }
+
 
 
 

@@ -36,9 +36,6 @@ password: password
 5. Authenticaiton
 
 
-## Next Steps
-1. Final tweaks & comment time 
-
 
 
 
