@@ -133,6 +133,24 @@ Route::post('/reserve/room', [ReservationController::class, 'room'])
 Route::post('/reserve/service', [ReservationController::class, 'service'])
 ->name('reserve.service');
 
+Route::post('/reserve/laundry', [ReservationController::class, 'laundry'])
+->name('reserve.laundry');
+
+Route::post('/reserve/beauty', [ReservationController::class, 'beauty'])
+->name('reserve.beauty');
+
+Route::post('/reserve/gym', [ReservationController::class, 'gym'])
+->name('reserve.gym');
+
+Route::post('/reserve/pool', [ReservationController::class, 'pool'])
+->name('reserve.pool');
+
+Route::post('/reserve/table', [ReservationController::class, 'table'])
+->name('reserve.table');
+
+Route::post('/reserve/trainer', [ReservationController::class, 'trainer'])
+->name('reserve.trainer');
+
 Route::get('/reserve/thankyou/{id}', [ReservationController::class, 'thankyou'])
 ->name('reserve.thankyou');
 

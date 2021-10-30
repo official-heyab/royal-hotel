@@ -73,6 +73,129 @@ class ReservationController extends Controller{
 
     }
 
+    public function laundry(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new LaundryReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->room_number = $request->input('roomNum');
+        $serviceReserve->room_code = $request->input('roomCode');
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Laundry Reserved');
+
+    }
+
+    public function beauty(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new BeautySalonReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->isMale = $request->input('sex');
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Beauty Salon Reserved');
+
+    }
+
+    public function gym(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new GYMReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','GYM Reserved');
+
+    }
+
+    public function pool(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new SwimmingPoolReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Swimming Pool Reserved');
+
+    }
+
+    public function table(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new DinnerTableReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Dinner Table Reserved');
+
+    }
+
+    public function trainer(Request $request){
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        $serviceReserve = new PersonalTrainerReservation;
+        $serviceReserve->service_id = $request->input('service');
+        $serviceReserve->reservation_id = $reservation->id;
+        $serviceReserve->status = 0;
+        $serviceReserve->remark = $request->input('remark');
+        $serviceReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Personal Trainer Reserved');
+
+    }
+
     public function thankyou($reservationID){
         $data['reservation'] = Reservation::find($reservationID);
         return view('thankyou',$data);

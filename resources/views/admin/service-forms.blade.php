@@ -183,7 +183,6 @@ aria-hidden="true">
         var service  = $(event.relatedTarget).data('val');
         $(this).find('input[name=id]').val(service.id);
         $(this).find('span#title').html(service.name);
-        console.log(service);
 
 
         for (var index in service.reservations) {
