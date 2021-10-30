@@ -1,3 +1,6 @@
+<?php
+    use App\Models\Service;
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -58,6 +61,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table">
+                                <input type="hidden" id="reserveService" value="{{ route('reserve.service')}}">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -95,11 +99,43 @@
                                                 </td>
                                                 <td>
                                                     <strong>{{ $service->peopleWaiting() }} reservations waiting</strong><br>
+                                                    @if($service->id==Service::IS_LAUNDRY)
+                                                    <a href="{{ route('admin.waiting.laundry') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @elseif($service->id==Service::IS_BEAUTY_SALON)
+                                                    <a href="{{ route('admin.waiting.beauty') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @elseif($service->id==Service::IS_GYM)
+                                                    <a href="{{ route('admin.waiting.gym') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @elseif($service->id==Service::IS_SWIMMING_POOL)
+                                                    <a href="{{ route('admin.waiting.pool') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @elseif($service->id==Service::IS_DINNER_TABLE)
+                                                    <a href="{{ route('admin.waiting.table') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @elseif($service->id==Service::IS_PERSONAL_TRAINER)
+                                                    <a href="{{ route('admin.waiting.trainer') }}" class="btn btn-primary btn-icon-split" >
+                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                        <span class="text">View</span>
+                                                    </a>
+                                                    @else
                                                     <a href="#" data-toggle="modal" data-target="#reservationModal"
                                                         class="btn btn-primary btn-icon-split" data-val="{{$service}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">History</span>
                                                     </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

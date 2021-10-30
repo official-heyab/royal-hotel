@@ -8,6 +8,15 @@ use App\Models\Service;
 use App\Models\Reservation;
 use App\Models\RoomReservation;
 use App\Models\ServiceReservation;
+use App\Models\MenuReservation;
+use App\Models\HallReservation;
+
+use App\Models\LaundryReservation;
+use App\Models\PersonalTrainerReservation;
+use App\Models\DinnerTableReservation;
+use App\Models\BeautySalonReservation;
+use App\Models\GYMReservation;
+use App\Models\SwimmingPoolReservation;
 
 class ReservationController extends Controller{
 
@@ -85,12 +94,75 @@ class ReservationController extends Controller{
         return redirect()->back()->with('success','Guest came back');
     }
 
-    public function reserveServiceDone($reservationID){
+    public function reserveMenuDone($mrID){
+        $reservation = MenuReservation::find($mrID);
+        $reservation->status = 1;
+        $reservation->save();
 
-        $reservation = ServiceReservation::where([
-            ["reservation_id","=",$reservationID],
-            ["status","=",0]
-        ])->get()[0];
+        return redirect()->back()->with('success','Guest is done');
+    }
+
+    public function reserveMenuCallback($mrID){
+        $reservation = MenuReservation::find($mrID);
+        $reservation->status = 0;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest came back');
+    }
+
+    public function reserveHallDone($hrID){
+        $reservation = HallReservation::find($hrID);
+        $reservation->status = 1;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest is done');
+    }
+
+    public function reserveHallCallback($hrID){
+        $reservation = HallReservation::find($hrID);
+        $reservation->status = 0;
+        $reservation->save();
+
+        return redirect()->back()->with('success','Guest came back');
+    }
+
+    public function reserveServiceDone($serviceID, $reservationID){
+        if($serviceID==Service::IS_LAUNDRY){
+            $reservation = LaundryReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_PERSONAL_TRAINER){
+            $reservation = PersonalTrainerReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_DINNER_TABLE){
+            $reservation = DinnerTableReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_BEAUTY_SALON){
+            $reservation = BeautySalonReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_GYM){
+            $reservation = GYMReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_SWIMMING_POOL){
+            $reservation = SwimmingPoolReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        } else {
+            $reservation = ServiceReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",0]
+            ])->get()[0];
+        }
         // echo "<pre>";
         // print_r($reservation);
 
@@ -100,11 +172,44 @@ class ReservationController extends Controller{
         return redirect()->back()->with('success','Guest is done');
     }
 
-    public function reserveServiceCallback($reservationID){
-        $reservation = ServiceReservation::where([
-            ["reservation_id","=",$reservationID],
-            ["status","=",1]
-        ])->get()[0];
+    public function reserveServiceCallback($serviceID, $reservationID){
+        if($serviceID==Service::IS_LAUNDRY){
+            $reservation = LaundryReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_PERSONAL_TRAINER){
+            $reservation = PersonalTrainerReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_DINNER_TABLE){
+            $reservation = DinnerTableReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_BEAUTY_SALON){
+            $reservation = BeautySalonReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_GYM){
+            $reservation = GYMReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else if($serviceID==Service::IS_SWIMMING_POOL){
+            $reservation = SwimmingPoolReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        } else {
+            $reservation = ServiceReservation::where([
+                ["reservation_id","=",$reservationID],
+                ["status","=",1]
+            ])->get()[0];
+        }
+
         $reservation->status = 0;
         $reservation->save();
 

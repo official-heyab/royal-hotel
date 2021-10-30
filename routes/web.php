@@ -41,11 +41,17 @@ Route::get('/logout', [HomeController::class, 'logout'])
 Route::get('/dashboard', [AdminController::class, 'dashboard'])
 ->middleware(['auth'])->name('dashboard');
 
+Route::get('/admin/menu', [AdminController::class, 'services'])
+->middleware(['auth'])->name('admin.menu');
+
 Route::get('/admin/services', [AdminController::class, 'services'])
 ->middleware(['auth'])->name('admin.services');
 
 Route::get('/admin/rooms', [AdminController::class, 'rooms'])
 ->middleware(['auth'])->name('admin.rooms');
+
+Route::get('/admin/halls', [AdminController::class, 'rooms'])
+->middleware(['auth'])->name('admin.halls');
 
 Route::get('/admin/users', [AdminController::class, 'users'])
 ->middleware(['auth'])->name('admin.users');
@@ -56,6 +62,26 @@ Route::get('/admin/waiting/rooms', [AdminController::class, 'waiting4Rooms'])
 
 Route::get('/admin/waiting/services', [AdminController::class, 'waiting4Services'])
 ->middleware(['auth'])->name('admin.waiting.services');
+
+Route::get('/admin/waiting/menu', [AdminController::class, 'waiting4Menu'])
+->middleware(['auth'])->name('admin.waiting.menu');
+
+Route::get('/admin/waiting/hall', [AdminController::class, 'waiting4Halls'])
+->middleware(['auth'])->name('admin.waiting.hall');
+
+
+
+Route::get('/admin/waiting/beauty', [AdminController::class, 'waiting4BeautySalon'])
+->middleware(['auth'])->name('admin.waiting.beauty');
+
+Route::get('/admin/waiting/gym', [AdminController::class, 'waiting4GYM'])
+->middleware(['auth'])->name('admin.waiting.gym');
+
+Route::get('/admin/waiting/laundry', [AdminController::class, 'waiting4Laundry'])
+->middleware(['auth'])->name('admin.waiting.laundry');
+
+Route::get('/admin/waiting/pool', [AdminController::class, 'waiting4SwimmingPool'])
+->middleware(['auth'])->name('admin.waiting.pool');
 
 Route::get('/admin/waiting/trainer', [AdminController::class, 'waiting4PersonalTranier'])
 ->middleware(['auth'])->name('admin.waiting.trainer');
@@ -117,10 +143,22 @@ Route::get('/reserve/room/done/{id}', [ReservationController::class, 'reserveRoo
 Route::get('/reserve/room/callback/{id}', [ReservationController::class, 'reserveRoomCallback'])
 ->name('reserve.room.callback');
 
-Route::get('/reserve/service/done/{id}', [ReservationController::class, 'reserveServiceDone'])
+Route::get('/reserve/menu/done/{id}', [ReservationController::class, 'reserveMenuDone'])
+->name('reserve.menu.done');
+
+Route::get('/reserve/menu/callback/{id}', [ReservationController::class, 'reserveMenuCallback'])
+->name('reserve.menu.callback');
+
+Route::get('/reserve/hall/done/{id}', [ReservationController::class, 'reserveHallDone'])
+->name('reserve.hall.done');
+
+Route::get('/reserve/hall/callback/{id}', [ReservationController::class, 'reserveHallCallback'])
+->name('reserve.hall.callback');
+
+Route::get('/reserve/service/done/{sID}/{id}', [ReservationController::class, 'reserveServiceDone'])
 ->name('reserve.service.done');
 
-Route::get('/reserve/service/callback/{id}', [ReservationController::class, 'reserveServiceCallback'])
+Route::get('/reserve/service/callback/{sID}/{id}', [ReservationController::class, 'reserveServiceCallback'])
 ->name('reserve.service.callback');
 
 

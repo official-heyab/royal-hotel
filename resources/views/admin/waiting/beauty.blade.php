@@ -36,7 +36,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">
-                            <i class="lnr lnr-calendar-full"></i><span> Room Reservations</span>
+                            <i class="lnr lnr-store"></i><span> Beauty Salon Reservations</span>
                         </h1>
                     </div>
 
@@ -49,20 +49,19 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of all room reservations</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of all beauty salon reservations</h6>
                         </div>
                         <div class="card-body">
                             <div class="table">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Room</th>
                                             <th>Name</th>
-                                            <th>Duration</th>
+                                            <th>Sex</th>
+                                            <th>When</th>
                                             <th>Remarks</th>
                                             <th>Phone</th>
                                             <th>Status</th>
@@ -70,34 +69,39 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Room</th>
                                             <th>Name</th>
-                                            <th>Duration</th>
+                                            <th>Sex</th>
+                                            <th>When</th>
                                             <th>Remarks</th>
                                             <th>Phone</th>
                                             <th>Status</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($roomReservations as $rr)
-                                            @if($rr->reservation_id!='')
+                                        @foreach($beautySalonReservations as $row)
+                                            @if($row->reservation_id!='')
                                             <tr>
-                                                <td>{{ $rr->name}}</td>
-                                                <td>{{ $rr->reservation_name }}</td>
-                                                <td>From: {{ $rr->arrival}} <br>To: {{ $rr->departure }}</td>
-                                                <td>{{ $rr->remark }}</td>
-                                                <td>{{ $rr->phone_number }}</td>
+                                                <td>{{ $row->reservation_name }}</td>
+                                                @if($row->isMale)
+                                                    <td>Male</td>
+                                                @else
+                                                    <td>Female</td>
+                                                @endif
+                                                <td>{{ $row->arrival}}</td>
+                                                <td>{{ $row->remark }}</td>
+                                                <td>{{ $row->phone_number }}</td>
                                                 <td>
-                                                    @if ($rr->status)
-                                                    <a href="{{ route('reserve.room.callback',$rr->id) }}" class="btn btn-primary btn-icon-split">
+                                                    @if ($row->status)
+                                                    <a href="{{ route('reserve.service.callback', ['sID' => $row->service_id, 'id' => $row->reservation_id]) }}" class="btn btn-primary btn-icon-split">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">Call Back</span>
                                                     </a>
                                                     @else
-                                                    <a href="{{ route('reserve.room.done',$rr->id) }}" class="btn btn-success btn-icon-split">
+                                                    <a href="{{ route('reserve.service.done', ['sID' => $row->service_id, 'id' => $row->reservation_id]) }}" class="btn btn-success btn-icon-split">
                                                         <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
                                                         <span class="text">Done</span>
                                                     </a>
+
                                                     @endif
                                                 </td>
                                             </tr>

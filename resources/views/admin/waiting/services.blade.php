@@ -80,6 +80,7 @@
                                     </tfoot>
                                     <tbody>
                                         @foreach($serviceReservations as $sr)
+                                            @if($sr->reservation_id!='')
                                             <tr>
                                                 <td>{{ $sr->name}}</td>
                                                 <td>{{ $sr->reservation_name }}</td>
@@ -88,19 +89,19 @@
                                                 <td>{{ $sr->phone_number }}</td>
                                                 <td>
                                                     @if ($sr->status)
-                                                    <a href="{{ route('reserve.service.callback',$sr->reservation_id) }}" class="btn btn-primary btn-icon-split">
-                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                                        <span class="text">Call Back</span>
-                                                    </a>
-                                                    @else
-                                                    <a href="{{ route('reserve.service.done',$sr->reservation_id) }}" class="btn btn-success btn-icon-split">
-                                                        <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
-                                                        <span class="text">Done</span>
-                                                    </a>
-
+                                                        <a href="{{ route('reserve.service.callback', ['sID' => $sr->service_id, 'id' => $sr->reservation_id]) }}" class="btn btn-primary btn-icon-split">
+                                                            <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
+                                                            <span class="text">Call Back</span>
+                                                        </a>
+                                                        @else
+                                                        <a href="{{ route('reserve.service.done', ['sID' => $sr->service_id, 'id' => $sr->reservation_id]) }}" class="btn btn-success btn-icon-split">
+                                                            <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
+                                                            <span class="text">Done</span>
+                                                        </a>
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

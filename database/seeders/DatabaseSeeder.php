@@ -9,11 +9,14 @@ class DatabaseSeeder extends Seeder{
 
     public function run(){
         $this->call([
-            SettingsSeeder::class,
             RolesSeeder::class,
+            UsersSeeder::class,
+
+            SettingsSeeder::class,
             RoomsSeeder::class,
             ServicesSeeder::class,
-            UsersSeeder::class,
+            MenuSeeder::class,
+            HallsSeeder::class,
         ]);
     }
 }

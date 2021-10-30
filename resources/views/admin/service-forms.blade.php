@@ -178,10 +178,12 @@ aria-hidden="true">
 <script>
     //get value from links
     $('#reservationModal').on('show.bs.modal', function (event) {
+        var reserveService = $("#reserveService").val();
         var tableBody="";
         var service  = $(event.relatedTarget).data('val');
         $(this).find('input[name=id]').val(service.id);
         $(this).find('span#title').html(service.name);
+        console.log(service);
 
 
         for (var index in service.reservations) {
@@ -194,7 +196,20 @@ aria-hidden="true">
             tableBody +="<td>"+reservation.phone_number+"</td>";
             tableBody +="<td>"+arrivalDate+"</td>";
             tableBody +="<td>"+service.reservations[index].remark+"</td>";
-            tableBody +="<td>"+service.reservations[index].status+"</td>";
+            tableBody +="<td>";
+            if(service.reservations[index].status){
+                tableBody += "<a href='"+reserveService+"/callback/"+reservation.id+"' ";
+                tableBody += " class='btn btn-primary btn-icon-split'>";
+                tableBody += " <span class='icon text-white-50'><i class='fas fa-info-circle'></i></span>";
+                tableBody += " <span class='text'>Call Back</span></a>";
+            } else {
+                tableBody += "<a href='"+reserveService+"/done/"+reservation.id+"' ";
+                tableBody += " class='btn btn-success btn-icon-split'>";
+                tableBody += " <span class='icon text-white-50'><i class='fas fa-check-double'></i></span>";
+                tableBody += " <span class='text'>Done</span></a>";
+            }
+
+            tableBody +="</td>";
             tableBody +="</tr>";
         }
 

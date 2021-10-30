@@ -11,8 +11,9 @@ Live demo: [Click Here](http://kuruzega.com/royal-hotel/public)
 4. Run </pre><code>php artisan migrate</code></pre>
 5. Run </pre><code>php artisan db:seed</code></pre>
 6. Open browser and type `localhost/royal-hotel/public` 
-7. Use the following credentials & Enjoy!! 
+7. Enjoy!! 
 
+## Credentials
 <pre><code>
 username: admin@royal.com
 password: password
@@ -28,12 +29,26 @@ username: chef@royal.com
 password: password
 </code></pre> 
 
-## Changelog
-1. Imported Front-End theme 
-2. Designed database
-3. Admin can create, read, update & delete Services & Rooms 
-4. Guests can reserve rooms & services
-5. Authenticaiton
+<pre><code>
+username: wellness@royal.com
+password: password
+</code></pre> 
+
+<pre><code>
+username: beauty@royal.com
+password: password
+</code></pre> 
+
+<pre><code>
+username: laundry@royal.com
+password: password
+</code></pre> 
+
+
+## MVC
+1. Models: `app/models` 
+2. Views: `resources/views`
+3. Controllers: `app/http/controllers`
 
 
 

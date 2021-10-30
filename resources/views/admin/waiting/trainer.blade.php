@@ -77,6 +77,7 @@
                                     </tfoot>
                                     <tbody>
                                         @foreach($personalTrainerReservations as $ptr)
+                                            @if($ptr->reservation_id!='')
                                             <tr>
                                                 <td>{{ $ptr->reservation_name }}</td>
                                                 <td>{{ $ptr->arrival}}</td>
@@ -84,12 +85,12 @@
                                                 <td>{{ $ptr->phone_number }}</td>
                                                 <td>
                                                     @if ($ptr->status)
-                                                    <a href="{{ route('reserve.service.callback',$ptr->reservation_id) }}" class="btn btn-primary btn-icon-split">
+                                                    <a href="{{ route('reserve.service.callback', ['sID' => $ptr->service_id, 'id' => $ptr->reservation_id]) }}" class="btn btn-primary btn-icon-split">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">Call Back</span>
                                                     </a>
                                                     @else
-                                                    <a href="{{ route('reserve.service.done',$ptr->reservation_id) }}" class="btn btn-success btn-icon-split">
+                                                    <a href="{{ route('reserve.service.done', ['sID' => $ptr->service_id, 'id' => $ptr->reservation_id]) }}" class="btn btn-success btn-icon-split">
                                                         <span class="icon text-white-50"><i class="fas fa-check-double"></i></span>
                                                         <span class="text">Done</span>
                                                     </a>
@@ -97,6 +98,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

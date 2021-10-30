@@ -17,7 +17,19 @@ class RolesSeeder extends Seeder{
         $role->save();
 
         $role = new Role;
-        $role->name = "Trainer";
+        $role->name = "Personal Trainer";
+        $role->save();
+
+        $role = new Role;
+        $role->name = "Laundry Manager";
+        $role->save();
+
+        $role = new Role;
+        $role->name = "Beauty Salon Manager";
+        $role->save();
+
+        $role = new Role;
+        $role->name = "Wellness Manager";
         $role->save();
     }
 }
