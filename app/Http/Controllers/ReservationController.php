@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Hall;
+use App\Models\Menu;
 use App\Models\Room;
 use App\Models\Service;
 use App\Models\Reservation;
@@ -51,6 +53,53 @@ class ReservationController extends Controller{
 
         return redirect()->route('reserve.thankyou',$reservation->id)
                 ->with('success','Room Reserved');
+    }
+
+    public function hall(Request $request){
+        $hall = Hall::where('name' , '=', $request->input('hall'))->first();
+
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        //Reserving hall
+        $hallReserve = new HallReservation;
+        $hallReserve->hall_id = $hall->id;
+        $hallReserve->reservation_id = $reservation->id;
+        $hallReserve->departure = $request->input('departure');
+        $hallReserve->status = 0;
+        $hallReserve->remark = $request->input('remark');
+        $hallReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Conference Hall Reserved');
+    }
+
+    public function menu(Request $request){
+        $menu = Menu::find($request->input('menuID'));
+
+        //Reservation
+        $reservation = new Reservation;
+        $reservation->reservation_name = $request->input('name');
+        $reservation->phone_number = $request->input('contact');
+        $reservation->arrival = $request->input('arrival');
+        $reservation->save();
+
+        //Reserving menu
+        $menuReserve = new MenuReservation;
+        $menuReserve->menu_id = $menu->id;
+        $menuReserve->reservation_id = $reservation->id;
+        $menuReserve->isTable = $request->input('isTable');
+        $menuReserve->ordered_by = $request->input('orderedBy');
+        $menuReserve->status = 0;
+        $menuReserve->remark = $request->input('remark');
+        $menuReserve->save();
+
+        return redirect()->route('reserve.thankyou',$reservation->id)
+                ->with('success','Conference Menu Reserved');
     }
 
     public function service(Request $request){

@@ -13,6 +13,7 @@ class HallFactory extends Factory{
             'size' => $this->faker->numberBetween(1,20),
             'status' => $this->faker->boolean(),
             'price' => $this->faker->numberBetween(1,20),
+            'description' => $this->faker->paragraph(),
         ];
     }
 

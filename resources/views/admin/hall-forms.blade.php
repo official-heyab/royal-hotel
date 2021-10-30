@@ -16,15 +16,29 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('service.store')}}" method='post' enctype='multipart/form-data'>
+                <form action="{{route('hall.store')}}" method='post' enctype='multipart/form-data'>
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" placeholder="Name">
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="cover_image" placeholder="https://linearicons.com/free">
+                    <div class="form-group" style="margin-left: 50px;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value=0 id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Not Available
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value=1 id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Available
+                            </label>
+                          </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" name="size" placeholder="Size">
+                        </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control" name="price" placeholder="Price">
                         </div>
@@ -55,13 +69,30 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('service.update')}}" method='post' enctype='multipart/form-data'>
+                <form action="{{route('hall.update')}}" method='post' enctype='multipart/form-data'>
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" placeholder="Name">
                     </div>
+                    <div class="form-group" style="margin-left: 50px;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value=0 id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Not Available
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value=1 id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Available
+                            </label>
+                          </div>
+                    </div>
                     <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" name="size" placeholder="Size">
+                        </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" class="form-control" name="price" placeholder="Price">
                         </div>
@@ -93,13 +124,30 @@ aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('service.delete')}}" method='post' enctype='multipart/form-data'>
+                <form action="{{route('hall.delete')}}" method='post' enctype='multipart/form-data'>
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <input type="text" disabled class="form-control" name="name" placeholder="Name">
                     </div>
+                    <div class="form-group" style="margin-left: 50px;">
+                        <div class="form-check">
+                            <input disabled class="form-check-input" type="radio" name="status" value=0 id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Not Available
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input disabled class="form-check-input" type="radio" name="status" value=1 id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Available
+                            </label>
+                          </div>
+                    </div>
                     <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" class="form-control" name="size" placeholder="Size">
+                        </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <input type="text" disabled class="form-control" name="price" placeholder="Price">
                         </div>
@@ -120,101 +168,21 @@ aria-hidden="true">
 <script>
     //get value links
     $('#editModal, #deleteModal').on('show.bs.modal', function (event) {
-        var service = $(event.relatedTarget).data('val');
+        var hall = $(event.relatedTarget).data('val');
 
-        $(this).find('span#title').html(service.name);
-        $(this).find('input[name=id]').val(service.id);
+        $(this).find('span#title').html(hall.name);
+        $(this).find('input[name=id]').val(hall.id);
 
-        $(this).find('input[name=name]').val(service.name);
-        $(this).find('input[name=price]').val(service.price);
-        $(this).find('textarea[name=description]').val(service.description);
+        $(this).find('input[name=name]').val(hall.name);
+        if(!hall.status)
+            $(this).find('input[name=status]')[0].checked = true;
+        else
+            $(this).find('input[name=status]')[1].checked = true;
+        $(this).find('input[name=size]').val(hall.size);
+        $(this).find('input[name=price]').val(hall.price);
+        $(this).find('textarea[name=description]').val(hall.description);
     });
 
 </script>
 
-<!-- Reservations Modal -->
-<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Reservations for <span id="title"></span></h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone Number</th>
-                            <th>Arrival</th>
-                            <th>Remarks</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone Number</th>
-                            <th>Arrival</th>
-                            <th>Remarks</th>
-                            <th>Status</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    //get value from links
-    $('#reservationModal').on('show.bs.modal', function (event) {
-        var reserveService = $("#reserveService").val();
-        var tableBody="";
-        var service  = $(event.relatedTarget).data('val');
-        $(this).find('input[name=id]').val(service.id);
-        $(this).find('span#title').html(service.name);
-
-
-        for (var index in service.reservations) {
-            var reservation = service.reservations[index].reservation;
-            var arrivalDate = $.datepicker.formatDate('DD, MM d yy',
-                                new Date(reservation.arrival));
-
-            tableBody +="<tr>";
-            tableBody +="<td>"+reservation.reservation_name+"</td>";
-            tableBody +="<td>"+reservation.phone_number+"</td>";
-            tableBody +="<td>"+arrivalDate+"</td>";
-            tableBody +="<td>"+service.reservations[index].remark+"</td>";
-            tableBody +="<td>";
-            if(service.reservations[index].status){
-                tableBody += "<a href='"+reserveService+"/callback/"+service.id+'/'+reservation.id+"' ";
-                tableBody += " class='btn btn-primary btn-icon-split'>";
-                tableBody += " <span class='icon text-white-50'><i class='fas fa-info-circle'></i></span>";
-                tableBody += " <span class='text'>Call Back</span></a>";
-            } else {
-                tableBody += "<a href='"+reserveService+"/done/"+service.id+'/'+reservation.id+"' ";
-                tableBody += " class='btn btn-success btn-icon-split'>";
-                tableBody += " <span class='icon text-white-50'><i class='fas fa-check-double'></i></span>";
-                tableBody += " <span class='text'>Done</span></a>";
-            }
-
-            tableBody +="</td>";
-            tableBody +="</tr>";
-        }
-
-        $(this).find('tbody').html(tableBody);
-    });
-
-
-</script>
 

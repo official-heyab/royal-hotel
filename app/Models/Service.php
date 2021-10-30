@@ -33,7 +33,7 @@ class Service extends Model{
         elseif($this->id == Service::IS_SWIMMING_POOL)
             return SwimmingPoolReservation::where('status', 0)->count();
         else
-            $this->reservations->where('status', 0)->count();
+            return $this->reservations->where('status', 0)->count();
     }
 
 

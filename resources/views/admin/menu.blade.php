@@ -1,3 +1,6 @@
+<?php
+    use App\Models\Service;
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -35,7 +38,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Rooms</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Foods & Drinks</h1>
                         <a href="#" data-toggle="modal" data-target="#createModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-plus fa-sm text-white-50"></i> Create New
                         </a>
@@ -54,56 +57,42 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List of all rooms</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">List of all foods & drinks</h6>
                         </div>
                         <div class="card-body">
                             <div class="table">
-                                <input type="hidden" id="reserveRoom" value="{{ route('reserve.room')}}">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Reservations</th>
+                                            <th>Foods & Drinks</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Reservations</th>
+                                            <th>Foods & Drinks</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach($rooms as $room)
+                                        @foreach($menu as $row)
                                             <tr>
                                                 <td>
-                                                    @if(substr($room->cover_image, 0, 4 ) == "http")
-                                                        <img width=100 src="{{$room->cover_image}}">
-                                                    @else
-                                                        <img width=100 src="{{asset('royal-theme/image')."/".$room->cover_image}}">
+                                                    {{$row->name}}<br>
+                                                    @if($row->isFood) <h5>Food</h5>
+                                                    @else <h5>Drinks</h5>
                                                     @endif
-                                                    {{$room->name}}<br><br>
-                                                    <strong>Price per night: </strong>{{$room->price_per_night}}
+                                                    <strong>Price: </strong>{{$row->price}}
                                                     <br><br>
 
                                                     <a href="#" data-toggle="modal" data-target="#editModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$room}}">
+                                                        class="btn btn-primary btn-icon-split" data-val="{{$row}}">
                                                         <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
                                                         <span class="text">Edit</span>
                                                     </a>
 
                                                     <a href="#" data-toggle="modal" data-target="#deleteModal"
-                                                        class="btn btn-danger btn-icon-split" data-val="{{$room}}">
+                                                        class="btn btn-danger btn-icon-split" data-val="{{$row}}">
                                                         <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
                                                         <span class="text">Delete</span>
-                                                    </a>
-
-                                                </td>
-                                                <td>
-                                                    <strong>{{ $room->peopleWaiting() }} reservations waiting</strong><br>
-                                                    <a href="#" data-toggle="modal" data-target="#reservationModal"
-                                                        class="btn btn-primary btn-icon-split" data-val="{{$room}}">
-                                                        <span class="icon text-white-50"><i class="fas fa-info-circle"></i></span>
-                                                        <span class="text">History</span>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -148,7 +137,8 @@
     </style>
 
 
-    @include('admin.room-forms')
+
+    @include('admin.menu-forms')
 
 </body>
 

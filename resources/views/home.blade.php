@@ -38,7 +38,7 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="accomodation_item text-center">
                                 <div class="hotel_img">
-                                    @if(substr($room->cover_image, 0, 4 ) == "http"))
+                                    @if(substr($room->cover_image, 0, 4 ) == "http")
                                         <img width=100 src="{{$room->cover_image}}">
                                     @else
                                         <img width=100 src="{{asset('royal-theme/image')."/".$room->cover_image}}">

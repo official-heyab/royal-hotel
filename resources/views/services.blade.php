@@ -1,3 +1,6 @@
+<?php
+    use App\Models\Service;
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -31,10 +34,19 @@
                 </div>
                 <div class="row mb_30">
                     @foreach ($services as $service)
+                    <?php
+                        $modalName = "service";
+                        if($service->id==Service::IS_LAUNDRY) $modalName = "laundry";
+                        elseif($service->id==Service::IS_BEAUTY_SALON) $modalName = "beauty";
+                        elseif($service->id==Service::IS_GYM) $modalName = "gym";
+                        elseif($service->id==Service::IS_SWIMMING_POOL) $modalName = "pool";
+                        elseif($service->id==Service::IS_DINNER_TABLE) $modalName = "table";
+                        elseif($service->id==Service::IS_PERSONAL_TRAINER) $modalName = "trainer";
+                    ?>
                         <div class="col-lg-3 col-sm-6">
                             <div class="accomodation_item text-center">
                                 <a href="#" data-toggle="modal" data-val="{{ $service }}"
-                                data-target="#serviceReserveModal">
+                                data-target="#{{ $modalName }}ReserveModal">
                                     <i style="font-size:100px;" class="lnr lnr-{{$service->cover_image}}"></i>
                                     <h4 class="sec_h4">{{ $service->name }}</h4></a>
                                     <h6>{{ $service->description }}</h6>
@@ -51,66 +63,6 @@
 
         @include('inc.footer')
         @include('inc.scripts')
-
-         <!-- Service Reservation Modal -->
-         <div class="modal fade" id="serviceReserveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-             <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">Service Reservation</h5>
-                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">×</span>
-                         </button>
-                     </div>
-                     <div class="modal-body">
-                         <div>
-                             <label>Service: <span id="name"><span></label><br>
-                             <label>Reservation Price: <span id="price"></label>
-                         </div><br>
-                         <h5>Enter your details</h5>
-                         <form action="{{route('reserve.service')}}" method='post' enctype='multipart/form-data'>
-                             @csrf
-                             <input type="hidden" name="service">
-
-                             <div class="form-group">
-                                 <input type="text" class="form-control" name="name" placeholder="Enter name">
-                             </div>
-                             <div class="form-group row">
-                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                     <input type="text" class="form-control" name="arrival" placeholder="When do you want this?">
-                                 </div>
-                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                     <input type="text" class="form-control" name="contact" placeholder="Enter phone number">
-                                 </div>
-                             </div>
-                             <div class="form-group">
-                                 <textarea rows=8 class="form-control" name="remark"
-                                 placeholder="Write us if you have any related requests..."></textarea>
-                             </div>
-                             <button type="submit" class="btn btn-primary btn-block">Reserve</button>
-                         </form>
-                     </div>
-                     <div class="modal-footer">
-                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-
-         <script>
-             //Service reservation modal
-             $('#serviceReserveModal').on('show.bs.modal', function (event) {
-                 var service = $(event.relatedTarget).data('val');
-
-                 $('#serviceReserveModal span#name').html(service.name);
-                 $('#serviceReserveModal span#price').html(service.price);
-                 $('#serviceReserveModal form input[name=service]').val(service.id);
-             });
-         </script>
-
-
-
-
+        @include('service-forms')
     </body>
 </html>

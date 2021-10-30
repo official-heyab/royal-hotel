@@ -25,6 +25,18 @@ class AdminController extends Controller{
         return view('admin.home');
     }
 
+    public function menu(){
+        $this->authorize('can_view_food_menu');
+        $data['menu'] = Menu::with('reservations.reservation')->get();
+        return view('admin.menu', $data);
+    }
+
+    public function halls(){
+        $this->authorize('can_view_conference_halls');
+        $data['halls'] = Hall::with('reservations.reservation')->get();
+        return view('admin.halls', $data);
+    }
+
     public function services(){
         $this->authorize('can_view_services');
         $data['services'] = Service::with('reservations.reservation')->get();
